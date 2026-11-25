@@ -4,7 +4,11 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : true,
+}));
+
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
